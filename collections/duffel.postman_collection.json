@@ -1,0 +1,369 @@
+{
+  "info": {
+    "name": "Duffel API",
+    "description": "The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. Authenticate with a Bearer access token and send the Duffel-Version header.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.duffel.com" }
+  ],
+  "item": [
+    {
+      "name": "Offer Requests",
+      "item": [
+        {
+          "name": "Create an offer request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/offer_requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "offer_requests"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"slices\": [\n      { \"origin\": \"LHR\", \"destination\": \"JFK\", \"departure_date\": \"2026-07-21\" }\n    ],\n    \"passengers\": [ { \"type\": \"adult\" } ],\n    \"cabin_class\": \"economy\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Get a single offer request",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/offer_requests/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "offer_requests", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Offers",
+      "item": [
+        {
+          "name": "List offers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/offers?offer_request_id={{offer_request_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "offers"],
+              "query": [ { "key": "offer_request_id", "value": "{{offer_request_id}}" } ]
+            }
+          }
+        },
+        {
+          "name": "Get a single offer",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/offers/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "offers", ":id"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create an order",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "orders"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"instant\",\n    \"selected_offers\": [ \"off_00009htYpSCXrwaB9DnUm0\" ],\n    \"passengers\": [],\n    \"payments\": [ { \"type\": \"balance\", \"amount\": \"521.79\", \"currency\": \"GBP\" } ]\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Get a single order",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/orders/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "orders", ":id"]
+            }
+          }
+        },
+        {
+          "name": "List available services",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/orders/:id/available_services",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "orders", ":id", "available_services"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Seat Maps",
+      "item": [
+        {
+          "name": "Get seat maps",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/seat_maps?offer_id={{offer_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "seat_maps"],
+              "query": [ { "key": "offer_id", "value": "{{offer_id}}" } ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Changes",
+      "item": [
+        {
+          "name": "Create an order change request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/order_change_requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "order_change_requests"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"data\": {}\n}" }
+          }
+        },
+        {
+          "name": "Confirm an order change",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/order_changes/:id/actions/confirm",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "order_changes", ":id", "actions", "confirm"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"data\": {}\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Cancellations",
+      "item": [
+        {
+          "name": "Create an order cancellation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/order_cancellations",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "order_cancellations"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"data\": {}\n}" }
+          }
+        },
+        {
+          "name": "Confirm an order cancellation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/order_cancellations/:id/actions/confirm",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "order_cancellations", ":id", "actions", "confirm"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create a payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/payments",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "payments"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"order_id\": \"ord_00009hthhsUZ8W4LxQgkjo\",\n    \"payment\": { \"type\": \"balance\", \"amount\": \"521.79\", \"currency\": \"GBP\" }\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "List payments",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/payments?order_id={{order_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "payments"],
+              "query": [ { "key": "order_id", "value": "{{order_id}}" } ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stays",
+      "item": [
+        {
+          "name": "Search accommodation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/stays/search",
+              "host": ["{{baseUrl}}"],
+              "path": ["stays", "search"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"check_in_date\": \"2026-07-21\",\n    \"check_out_date\": \"2026-07-23\",\n    \"rooms\": 1,\n    \"guests\": [ { \"type\": \"adult\" } ],\n    \"location\": { \"radius\": 5, \"geographic_coordinates\": { \"latitude\": 51.5074, \"longitude\": -0.1278 } }\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Create a booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/stays/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["stays", "bookings"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"data\": {}\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Create a webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "webhooks"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"url\": \"https://example.com/webhooks/duffel\",\n    \"events\": [ \"order.created\", \"order.airline_initiated_change_detected\" ]\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Ping a webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Duffel-Version", "value": "v2" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/air/webhooks/:id/actions/ping",
+              "host": ["{{baseUrl}}"],
+              "path": ["air", "webhooks", ":id", "actions", "ping"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

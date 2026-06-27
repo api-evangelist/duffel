@@ -1,0 +1,330 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duffel API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{accessToken}}"
+    },
+    "headers": [
+      {
+        "name": "Duffel-Version",
+        "value": "v2"
+      },
+      {
+        "name": "Accept",
+        "value": "application/json"
+      }
+    ]
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offer Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an offer request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/offer_requests",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"data\": {\n    \"slices\": [\n      { \"origin\": \"LHR\", \"destination\": \"JFK\", \"departure_date\": \"2026-07-21\" }\n    ],\n    \"passengers\": [ { \"type\": \"adult\" } ],\n    \"cabin_class\": \"economy\"\n  }\n}"
+            }
+          },
+          "docs": "Search for flights by creating an offer request."
+        },
+        {
+          "info": {
+            "name": "Get a single offer request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/offer_requests/{id}"
+          },
+          "docs": "Retrieve an offer request by its ID."
+        },
+        {
+          "info": {
+            "name": "List offer requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/offer_requests"
+          },
+          "docs": "Retrieve a paginated list of offer requests."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/offers?offer_request_id={offer_request_id}"
+          },
+          "docs": "List the offers returned for an offer request."
+        },
+        {
+          "info": {
+            "name": "Get a single offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/offers/{id}"
+          },
+          "docs": "Retrieve a single offer."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/orders",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"data\": {\n    \"type\": \"instant\",\n    \"selected_offers\": [ \"off_00009htYpSCXrwaB9DnUm0\" ],\n    \"passengers\": [],\n    \"payments\": [ { \"type\": \"balance\", \"amount\": \"521.79\", \"currency\": \"GBP\" } ]\n  }\n}"
+            }
+          },
+          "docs": "Book a selected offer to create a flight order."
+        },
+        {
+          "info": {
+            "name": "Get a single order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/orders/{id}"
+          },
+          "docs": "Retrieve a single order."
+        },
+        {
+          "info": {
+            "name": "List available services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/orders/{id}/available_services"
+          },
+          "docs": "List available ancillary services for an order."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Seat Maps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get seat maps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/seat_maps?offer_id={offer_id}"
+          },
+          "docs": "Retrieve seat maps for an offer, one per segment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Order Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an order change request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/order_change_requests",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Search for change options for an existing order."
+        },
+        {
+          "info": {
+            "name": "Confirm an order change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/order_changes/{id}/actions/confirm",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Confirm a pending order change."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Order Cancellations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an order cancellation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/order_cancellations",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Preview the refund for cancelling an order."
+        },
+        {
+          "info": {
+            "name": "Confirm an order cancellation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/order_cancellations/{id}/actions/confirm"
+          },
+          "docs": "Confirm a pending order cancellation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/payments",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"data\": {\n    \"order_id\": \"ord_00009hthhsUZ8W4LxQgkjo\",\n    \"payment\": { \"type\": \"balance\", \"amount\": \"521.79\", \"currency\": \"GBP\" }\n  }\n}"
+            }
+          },
+          "docs": "Pay for a held order."
+        },
+        {
+          "info": {
+            "name": "List payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/payments?order_id={order_id}"
+          },
+          "docs": "List payments for an order."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stays",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search accommodation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/stays/search",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"data\": {\n    \"check_in_date\": \"2026-07-21\",\n    \"check_out_date\": \"2026-07-23\",\n    \"rooms\": 1,\n    \"guests\": [ { \"type\": \"adult\" } ],\n    \"location\": { \"radius\": 5, \"geographic_coordinates\": { \"latitude\": 51.5074, \"longitude\": -0.1278 } }\n  }\n}"
+            }
+          },
+          "docs": "Search for accommodation by location or property."
+        },
+        {
+          "info": {
+            "name": "Create a booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/stays/bookings",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Book a quoted accommodation rate."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"data\": {\n    \"url\": \"https://example.com/webhooks/duffel\",\n    \"events\": [ \"order.created\", \"order.airline_initiated_change_detected\" ]\n  }\n}"
+            }
+          },
+          "docs": "Register a webhook endpoint to receive events."
+        },
+        {
+          "info": {
+            "name": "Ping a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/webhooks/{id}/actions/ping"
+          },
+          "docs": "Send a ping event to a webhook."
+        }
+      ]
+    }
+  ]
+}

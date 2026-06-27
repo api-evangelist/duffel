@@ -1,0 +1,54 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Duffel
+providerId: duffel
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Travel
+- Flights
+- Hotels
+- Booking
+- Payments
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Duffel API applies per-endpoint rate limits and returns HTTP 429 with a
+  rate_limit_exceeded error when they are exceeded. Responses expose
+  RateLimit-Limit, RateLimit-Remaining, and RateLimit-Reset headers describing
+  the window. Limits vary by endpoint and account; in addition, a commercial
+  search-to-book ratio (1500:1) governs how many searches are included before
+  excess search fees apply. Specific per-endpoint numeric limits are not
+  reconciled in this artifact.
+notes: >-
+  Verify current per-endpoint limits and header names against the Duffel API
+  reference and rate-limiting documentation on reconciliation; the 1500:1
+  search-to-book ratio is a commercial limit from the pricing page rather than
+  a hard request throttle.
+sources:
+- https://duffel.com/docs/api/overview/rate-limits
+- https://duffel.com/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: Per-Endpoint Request Limit
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Limits vary by endpoint; reported via RateLimit-Limit / RateLimit-Remaining / RateLimit-Reset headers.
+- name: Search-to-Book Ratio
+  scope: account
+  metric: searches_per_order
+  limit: 1500:1
+  notes: Commercial ratio; searches beyond 1500 per confirmed order incur a $0.005 per-search excess fee.
+policies:
+- name: Rate Limit Headers
+  description: Clients should read RateLimit-Limit, RateLimit-Remaining, and RateLimit-Reset to pace requests.
+- name: Backoff Strategy
+  description: On HTTP 429, implement exponential backoff with jitter and retry after the reset window.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

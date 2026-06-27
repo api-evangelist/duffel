@@ -1,0 +1,110 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Duffel
+providerId: duffel
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: true
+tags:
+- Travel
+- Flights
+- Hotels
+- Booking
+- Payments
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Duffel spend. Duffel bills a pay-as-you-go, per-booking model:
+  a per-confirmed-order fee for flights, a per-paid-ancillary fee, a percentage
+  of order value for managed content, an FX margin on currency conversions, and
+  an excess search fee once the 1500:1 search-to-book ratio is exceeded. Stays
+  is monetized through a commission / profit-share on completed bookings rather
+  than a usage fee. Enterprise agreements carry custom pricing.
+notes: >-
+  Per-fee rates are subject to change and may vary by agreement; verify against
+  the Duffel pricing page during reconciliation.
+sources:
+- https://duffel.com/pricing
+- https://duffel.com/docs
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Duffel
+serviceCategory: Travel and Booking
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Duffel API
+  ServiceCategory: Travel and Booking
+  ProviderName: Duffel
+  PublisherName: Duffel
+  InvoiceIssuerName: Duffel
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: confirmed_orders
+  description: Confirmed flight orders, billed per order ($3.00) each month.
+  unit: orders
+  aggregation: sum
+  dimensions:
+  - account
+  - mode
+- name: paid_ancillaries
+  description: Paid ancillaries (bags, seats, etc.) added to orders, billed per ancillary ($2.00).
+  unit: ancillaries
+  aggregation: sum
+  dimensions:
+  - account
+  - order
+- name: managed_content_value
+  description: Order value subject to the managed content fee (1% of total order value).
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - account
+  - order
+- name: excess_searches
+  description: Searches beyond the 1500:1 search-to-book ratio, billed at $0.005 per search.
+  unit: searches
+  aggregation: sum
+  dimensions:
+  - account
+- name: fx_converted_amount
+  description: Amount converted between currencies, charged a 2% FX margin.
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - account
+  - currency
+- name: stays_commission
+  description: Profit-share commission earned (negative cost) on completed Stays bookings.
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - account
+  - accommodation
+principles:
+- name: Visibility
+  description: Pull Duffel order, ancillary, and search-volume reporting; track per-order and per-ancillary fees.
+- name: Allocation
+  description: Tag orders by brand/channel/team; map confirmed-order and ancillary fees to cost centers.
+- name: Optimization
+  description: Improve the search-to-book ratio to stay within the included 1500:1 band; minimize unnecessary FX conversions; lean on Stays commission to offset flight fees.
+- name: Accountability
+  description: Assign owners per channel; review confirmed-order, ancillary, managed-content, FX, and excess-search fees monthly against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

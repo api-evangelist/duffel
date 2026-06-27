@@ -1,0 +1,140 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Duffel
+providerId: duffel
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: true
+tags:
+- Travel
+- Flights
+- Hotels
+- Booking
+- Payments
+- Plans
+description: >-
+  Duffel uses a pay-as-you-go, per-booking model with zero up-front cost. For
+  flights, a fee is charged per confirmed order, plus per-paid-ancillary fees,
+  a percentage of order value for managed content, an FX margin when a currency
+  conversion is required, and an excess search fee when the search-to-book ratio
+  is exceeded. For Stays, Duffel operates on a commission/profit-share model
+  where commission paid by the accommodation provider on completed bookings is
+  shared with the seller. An Enterprise plan offers custom pricing and the
+  option to use your own IATA accreditation.
+notes: >-
+  Representative published rates from the Duffel pricing page; verify the
+  current per-order, ancillary, managed-content, FX, and search-ratio fees and
+  the Stays commission share during reconciliation, as these change and vary by
+  agreement.
+sources:
+- https://duffel.com/pricing
+- https://duffel.com/docs
+plans:
+- id: duffel-pay-as-you-go
+  name: Pay as you go
+  type: usage
+  description: >-
+    Zero up-front cost; pay only for confirmed bookings and paid ancillaries.
+  entries:
+  - label: Confirmed Flight Order
+    name: order
+    type: usage
+    metric: orders
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $3.00 per confirmed order
+    userMultiplied: false
+  - label: Paid Ancillary
+    name: ancillary
+    type: usage
+    metric: ancillaries
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $2.00 per paid ancillary
+    userMultiplied: false
+  - label: Managed Content
+    name: managed_content
+    type: usage
+    metric: order_value
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 1% of total order value
+    userMultiplied: false
+  - label: Excess Searches
+    name: excess_search
+    type: usage
+    metric: searches
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.005 per search above the 1500:1 search-to-book ratio
+    userMultiplied: false
+  - label: Foreign Exchange (FX)
+    name: fx
+    type: usage
+    metric: converted_amount
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 2% on the exchange rate when a currency conversion is required
+    userMultiplied: false
+  elements:
+  - name: Flight Search and Booking
+  - name: Seat Maps and Ancillaries
+  - name: Order Changes and Cancellations
+  - name: Payments
+- id: duffel-stays
+  name: Stays
+  type: usage
+  description: >-
+    Commission / profit-share model for accommodation bookings; commission paid
+    by the accommodation provider on completed stays is shared with the seller,
+    with the share increasing at higher volume.
+  entries:
+  - label: Completed Stay Booking
+    name: stay_commission
+    type: usage
+    metric: bookings
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: profit share of provider commission on completed bookings
+    userMultiplied: false
+  elements:
+  - name: Accommodation Search
+  - name: Quotes and Bookings
+- id: duffel-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom pricing for scaling and high-volume businesses, volume discounts,
+    dedicated technical support, and the option to use your own IATA
+    accreditation. Contact Duffel sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Own IATA Accreditation
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

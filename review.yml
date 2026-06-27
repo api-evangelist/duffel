@@ -1,0 +1,83 @@
+aid: duffel
+name: Duffel
+review:
+  question: Does Duffel expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-25'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No streaming or event-push transport is exposed for client subscription.
+    Duffel delivers asynchronous events via outbound HTTPS webhooks (the seller
+    registers a URL that Duffel POSTs signed events to), not via WebSocket or
+    Server-Sent Events. No AsyncAPI document was authored because there is no
+    SSE or WebSocket surface; the webhook surface is modeled in the OpenAPI
+    spec under /air/webhooks.
+findings:
+  summary: |
+    Duffel does not publish a documented public WebSocket API. The Duffel
+    platform is a REST (HTTPS) API under https://api.duffel.com, authenticated
+    with a Bearer access token and a required Duffel-Version header. Asynchronous
+    notifications (for example order.created and airline-initiated change
+    detected) are delivered by outbound, cryptographically signed webhook POSTs
+    to a seller-registered URL, with retries on an exponential backoff for up to
+    72 hours. No realtime, bidirectional ws:// or wss:// endpoint is documented
+    for any product (Flights, Stays, Payments).
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.duffel.com
+      documented: true
+    - protocol: Webhooks
+      scheme: https
+      note: Outbound signed HTTPS event delivery to a seller-registered URL. Not WebSocket and not a client-subscribed stream.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Duffel's API reference for Flights, Stays, Payments, or webhooks as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.duffel.com/air/offer_requests
+    - GET  https://api.duffel.com/air/offer_requests/{id}
+    - GET  https://api.duffel.com/air/offers
+    - GET  https://api.duffel.com/air/offers/{id}
+    - POST https://api.duffel.com/air/orders
+    - GET  https://api.duffel.com/air/orders/{id}
+    - PATCH https://api.duffel.com/air/orders/{id}
+    - GET  https://api.duffel.com/air/orders/{id}/available_services
+    - POST https://api.duffel.com/air/orders/{id}/services
+    - GET  https://api.duffel.com/air/seat_maps
+    - POST https://api.duffel.com/air/order_change_requests
+    - POST https://api.duffel.com/air/order_changes
+    - POST https://api.duffel.com/air/order_changes/{id}/actions/confirm
+    - POST https://api.duffel.com/air/order_cancellations
+    - POST https://api.duffel.com/air/order_cancellations/{id}/actions/confirm
+    - POST https://api.duffel.com/air/payments
+    - GET  https://api.duffel.com/air/payments
+    - GET  https://api.duffel.com/air/payments/{id}
+    - POST https://api.duffel.com/air/webhooks
+    - GET  https://api.duffel.com/air/webhooks
+    - PATCH https://api.duffel.com/air/webhooks/{id}
+    - DELETE https://api.duffel.com/air/webhooks/{id}
+    - POST https://api.duffel.com/air/webhooks/{id}/actions/ping
+    - POST https://api.duffel.com/stays/search
+    - POST https://api.duffel.com/stays/quotes
+    - POST https://api.duffel.com/stays/bookings
+sources:
+  - url: https://duffel.com/docs
+    type: Documentation
+    note: Overview lists REST base URL https://api.duffel.com with Bearer auth and Duffel-Version header; no WebSocket mentioned.
+  - url: https://duffel.com/docs/api/v2/offer-requests
+    type: APIReference
+    note: Offer request, offer, order, payment, seat map, and Stays endpoints are all HTTPS REST.
+  - url: https://duffel.com/docs/api/v2/webhooks
+    type: Documentation
+    note: Asynchronous events are delivered via outbound signed HTTPS webhooks with 72-hour retry; not WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or client-subscribed streaming surface exists. Asynchronous
+    behavior is delivered through outbound HTTPS webhooks, which are modeled in
+    the OpenAPI specification under /air/webhooks rather than in an AsyncAPI
+    document. No AsyncAPI artifact was created.
