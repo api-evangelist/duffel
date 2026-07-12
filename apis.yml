@@ -187,6 +187,12 @@ apis:
     creation, airline-initiated changes, and ping events; list, update, delete, and
     ping webhooks.
 common:
+- type: VulnerabilityDisclosure
+  url: security/duffel-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/duffel-domain-security.yml
+- type: Authentication
+  url: authentication/duffel-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/duffelhq
 - type: LinkedIn
@@ -201,6 +207,8 @@ common:
   url: rate-limits/duffel-rate-limits.yml
 - type: FinOps
   url: finops/duffel-finops.yml
+- url: https://duffel.com/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

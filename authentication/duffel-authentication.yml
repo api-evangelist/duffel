@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/duffel-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization
+    header (Authorization: Bearer YOUR_ACCESS_TOKEN).'
+  sources:
+  - openapi/duffel-openapi.yml
