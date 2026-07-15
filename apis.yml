@@ -187,6 +187,8 @@ apis:
     creation, airline-initiated changes, and ping events; list, update, delete, and
     ping webhooks.
 common:
+- type: AgenticAccess
+  url: agentic-access/duffel-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/duffel-vulnerability-disclosure.yml
 - type: DomainSecurity
