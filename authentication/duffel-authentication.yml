@@ -9,6 +9,6 @@ schemes:
   type: http
   scheme: bearer
   description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization
-    header (Authorization: Bearer YOUR_ACCESS_TOKEN).'
+    header (Authorization: Bearer [example key]).'
   sources:
   - openapi/duffel-openapi.yml
