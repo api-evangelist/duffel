@@ -1,0 +1,198 @@
+openapi: 3.0.1
+info:
+  title: Duffel Ancillaries Stays API
+  description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
+  termsOfService: https://duffel.com/legal/terms-of-use
+  contact:
+    name: Duffel Support
+    url: https://help.duffel.com
+  version: v2
+servers:
+- url: https://api.duffel.com
+security:
+- bearerAuth: []
+tags:
+- name: Stays
+  description: Accommodation search and booking.
+paths:
+  /stays/search:
+    post:
+      operationId: searchStays
+      tags:
+      - Stays
+      summary: Search accommodation
+      description: Searches for accommodation by location (latitude/longitude plus radius) or a specific accommodation, with check-in/check-out dates, guests, and rooms. Returns a list of search results.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaysSearch'
+      responses:
+        '200':
+          description: A list of accommodation search results.
+  /stays/search_results/{id}/actions/fetch_all_rates:
+    post:
+      operationId: fetchAllRates
+      tags:
+      - Stays
+      summary: Fetch all rates for a search result
+      description: Retrieves all available rooms and rates for a search result.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The search result with all rooms and rates.
+  /stays/quotes:
+    post:
+      operationId: createStaysQuote
+      tags:
+      - Stays
+      summary: Create a quote
+      description: Creates a quote for a chosen rate, confirming its current price before booking.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: The quote was created.
+  /stays/quotes/{id}:
+    get:
+      operationId: getStaysQuote
+      tags:
+      - Stays
+      summary: Get a quote
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The quote.
+  /stays/bookings:
+    post:
+      operationId: createStaysBooking
+      tags:
+      - Stays
+      summary: Create a booking
+      description: Books a quoted rate, supplying guest details and payment.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: The booking was created.
+    get:
+      operationId: listStaysBookings
+      tags:
+      - Stays
+      summary: List bookings
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A paginated list of bookings.
+  /stays/bookings/{id}:
+    get:
+      operationId: getStaysBooking
+      tags:
+      - Stays
+      summary: Get a single booking
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The booking.
+  /stays/bookings/{id}/actions/cancel:
+    post:
+      operationId: cancelStaysBooking
+      tags:
+      - Stays
+      summary: Cancel a booking
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The cancelled booking.
+components:
+  schemas:
+    StaysSearch:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - check_in_date
+          - check_out_date
+          - rooms
+          - guests
+          properties:
+            check_in_date:
+              type: string
+              format: date
+            check_out_date:
+              type: string
+              format: date
+            rooms:
+              type: integer
+              example: 1
+            guests:
+              type: array
+              items:
+                type: object
+            location:
+              type: object
+              properties:
+                radius:
+                  type: integer
+                geographic_coordinates:
+                  type: object
+                  properties:
+                    latitude:
+                      type: number
+                    longitude:
+                      type: number
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization header (Authorization: Bearer YOUR_ACCESS_TOKEN).'

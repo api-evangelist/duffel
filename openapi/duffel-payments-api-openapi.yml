@@ -1,0 +1,118 @@
+openapi: 3.0.1
+info:
+  title: Duffel Ancillaries Payments API
+  description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
+  termsOfService: https://duffel.com/legal/terms-of-use
+  contact:
+    name: Duffel Support
+    url: https://help.duffel.com
+  version: v2
+servers:
+- url: https://api.duffel.com
+security:
+- bearerAuth: []
+tags:
+- name: Payments
+  description: Pay for held orders.
+paths:
+  /air/payments:
+    post:
+      operationId: createPayment
+      tags:
+      - Payments
+      summary: Create a payment
+      description: Pays for a held order using a supported payment method.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePayment'
+      responses:
+        '201':
+          description: The payment was created.
+    get:
+      operationId: listPayments
+      tags:
+      - Payments
+      summary: List payments
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - name: order_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of payments.
+  /air/payments/{id}:
+    get:
+      operationId: getPayment
+      tags:
+      - Payments
+      summary: Get a single payment
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The payment.
+components:
+  schemas:
+    Payment:
+      type: object
+      required:
+      - type
+      - amount
+      - currency
+      properties:
+        type:
+          type: string
+          enum:
+          - balance
+          - arc_bsp_cash
+          - card
+        amount:
+          type: string
+          example: '521.79'
+        currency:
+          type: string
+          example: GBP
+    CreatePayment:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - order_id
+          - payment
+          properties:
+            order_id:
+              type: string
+            payment:
+              $ref: '#/components/schemas/Payment'
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization header (Authorization: Bearer YOUR_ACCESS_TOKEN).'

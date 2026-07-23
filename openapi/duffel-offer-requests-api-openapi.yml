@@ -1,0 +1,223 @@
+openapi: 3.0.1
+info:
+  title: Duffel Ancillaries Offer Requests API
+  description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
+  termsOfService: https://duffel.com/legal/terms-of-use
+  contact:
+    name: Duffel Support
+    url: https://help.duffel.com
+  version: v2
+servers:
+- url: https://api.duffel.com
+security:
+- bearerAuth: []
+tags:
+- name: Offer Requests
+  description: Search for flights by creating offer requests.
+paths:
+  /air/offer_requests:
+    post:
+      operationId: createOfferRequest
+      tags:
+      - Offer Requests
+      summary: Create an offer request
+      description: Searches for flights. Provide the slices, passengers, and an optional cabin class; Duffel queries airlines and returns matching offers.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - name: return_offers
+        in: query
+        schema:
+          type: boolean
+          default: true
+      - name: supplier_timeout
+        in: query
+        schema:
+          type: integer
+          default: 20000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOfferRequest'
+      responses:
+        '201':
+          description: The offer request was created with offers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferRequestResponse'
+    get:
+      operationId: listOfferRequests
+      tags:
+      - Offer Requests
+      summary: List offer requests
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/After'
+      - $ref: '#/components/parameters/Before'
+      responses:
+        '200':
+          description: A paginated list of offer requests.
+  /air/offer_requests/{id}:
+    get:
+      operationId: getOfferRequest
+      tags:
+      - Offer Requests
+      summary: Get a single offer request
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The offer request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferRequestResponse'
+components:
+  schemas:
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: off_0000A3vUda8dKRtUTwfM01
+        total_amount:
+          type: string
+          example: '521.79'
+        total_currency:
+          type: string
+          example: GBP
+        tax_amount:
+          type: string
+        owner:
+          type: object
+          properties:
+            iata_code:
+              type: string
+            name:
+              type: string
+        expires_at:
+          type: string
+          format: date-time
+    Passenger:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - adult
+          - child
+          - infant_without_seat
+        age:
+          type: integer
+    OfferRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          example: orq_0000A3tQSmKyqOrcySrGbo
+        live_mode:
+          type: boolean
+        cabin_class:
+          type: string
+        slices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Slice'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        created_at:
+          type: string
+          format: date-time
+    Slice:
+      type: object
+      required:
+      - origin
+      - destination
+      - departure_date
+      properties:
+        origin:
+          type: string
+          description: IATA city or airport code for the origin.
+          example: LHR
+        destination:
+          type: string
+          description: IATA city or airport code for the destination.
+          example: JFK
+        departure_date:
+          type: string
+          format: date
+          example: '2026-07-21'
+    OfferRequestResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/OfferRequest'
+    CreateOfferRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - slices
+          - passengers
+          properties:
+            slices:
+              type: array
+              items:
+                $ref: '#/components/schemas/Slice'
+            passengers:
+              type: array
+              items:
+                $ref: '#/components/schemas/Passenger'
+            cabin_class:
+              type: string
+              enum:
+              - first
+              - business
+              - premium_economy
+              - economy
+  parameters:
+    Before:
+      name: before
+      in: query
+      schema:
+        type: string
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization header (Authorization: Bearer YOUR_ACCESS_TOKEN).'

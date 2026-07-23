@@ -1,0 +1,49 @@
+openapi: 3.0.1
+info:
+  title: Duffel Ancillaries Seat Maps API
+  description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
+  termsOfService: https://duffel.com/legal/terms-of-use
+  contact:
+    name: Duffel Support
+    url: https://help.duffel.com
+  version: v2
+servers:
+- url: https://api.duffel.com
+security:
+- bearerAuth: []
+tags:
+- name: Seat Maps
+  description: Seat maps for an offer.
+paths:
+  /air/seat_maps:
+    get:
+      operationId: getSeatMaps
+      tags:
+      - Seat Maps
+      summary: Get seat maps
+      description: Returns a list of seat maps, one per segment, for the given offer.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - name: offer_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The seat maps for the offer.
+components:
+  parameters:
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization header (Authorization: Bearer YOUR_ACCESS_TOKEN).'

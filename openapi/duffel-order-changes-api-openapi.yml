@@ -1,0 +1,116 @@
+openapi: 3.0.1
+info:
+  title: Duffel Ancillaries Order Changes API
+  description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
+  termsOfService: https://duffel.com/legal/terms-of-use
+  contact:
+    name: Duffel Support
+    url: https://help.duffel.com
+  version: v2
+servers:
+- url: https://api.duffel.com
+security:
+- bearerAuth: []
+tags:
+- name: Order Changes
+  description: Modify an existing order.
+paths:
+  /air/order_change_requests:
+    post:
+      operationId: createOrderChangeRequest
+      tags:
+      - Order Changes
+      summary: Create an order change request
+      description: Searches for the available change options for an existing order.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: The order change request with available offers.
+  /air/order_change_requests/{id}:
+    get:
+      operationId: getOrderChangeRequest
+      tags:
+      - Order Changes
+      summary: Get a single order change request
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The order change request.
+  /air/order_changes:
+    post:
+      operationId: createOrderChange
+      tags:
+      - Order Changes
+      summary: Create a pending order change
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: The pending order change was created.
+  /air/order_changes/{id}:
+    get:
+      operationId: getOrderChange
+      tags:
+      - Order Changes
+      summary: Get a single order change
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The order change.
+  /air/order_changes/{id}/actions/confirm:
+    post:
+      operationId: confirmOrderChange
+      tags:
+      - Order Changes
+      summary: Confirm an order change
+      description: Confirms a pending order change, applying the new flights and pricing.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The confirmed order change.
+components:
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization header (Authorization: Bearer YOUR_ACCESS_TOKEN).'

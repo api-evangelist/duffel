@@ -1,0 +1,151 @@
+openapi: 3.0.1
+info:
+  title: Duffel Ancillaries Offers API
+  description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
+  termsOfService: https://duffel.com/legal/terms-of-use
+  contact:
+    name: Duffel Support
+    url: https://help.duffel.com
+  version: v2
+servers:
+- url: https://api.duffel.com
+security:
+- bearerAuth: []
+tags:
+- name: Offers
+  description: Flight offers returned for an offer request.
+paths:
+  /air/offers:
+    get:
+      operationId: listOffers
+      tags:
+      - Offers
+      summary: List offers
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - name: offer_request_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A paginated list of offers.
+  /air/offers/{id}:
+    get:
+      operationId: getOffer
+      tags:
+      - Offers
+      summary: Get a single offer
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      - name: return_available_services
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: The offer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferResponse'
+  /air/offers/{id}/actions/price:
+    post:
+      operationId: priceOffer
+      tags:
+      - Offers
+      summary: Update an offer to fetch the latest price
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The re-priced offer.
+  /air/offers/{offer_id}/passengers/{offer_passenger_id}:
+    patch:
+      operationId: updateOfferPassenger
+      tags:
+      - Offers
+      summary: Update a single offer passenger
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - name: offer_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: offer_passenger_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The updated offer passenger.
+components:
+  schemas:
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: off_0000A3vUda8dKRtUTwfM01
+        total_amount:
+          type: string
+          example: '521.79'
+        total_currency:
+          type: string
+          example: GBP
+        tax_amount:
+          type: string
+        owner:
+          type: object
+          properties:
+            iata_code:
+              type: string
+            name:
+              type: string
+        expires_at:
+          type: string
+          format: date-time
+    OfferResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Offer'
+  parameters:
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization header (Authorization: Bearer YOUR_ACCESS_TOKEN).'

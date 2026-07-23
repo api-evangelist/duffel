@@ -1,0 +1,188 @@
+openapi: 3.0.1
+info:
+  title: Duffel Ancillaries Orders API
+  description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
+  termsOfService: https://duffel.com/legal/terms-of-use
+  contact:
+    name: Duffel Support
+    url: https://help.duffel.com
+  version: v2
+servers:
+- url: https://api.duffel.com
+security:
+- bearerAuth: []
+tags:
+- name: Orders
+  description: Create and manage flight orders (bookings).
+paths:
+  /air/orders:
+    post:
+      operationId: createOrder
+      tags:
+      - Orders
+      summary: Create an order
+      description: Books one of the offers returned for an offer request. Provide the selected offer id, passenger details, and either an instant payment or a hold to pay later.
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrder'
+      responses:
+        '201':
+          description: The order was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+    get:
+      operationId: listOrders
+      tags:
+      - Orders
+      summary: List orders
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/After'
+      responses:
+        '200':
+          description: A paginated list of orders.
+  /air/orders/{id}:
+    get:
+      operationId: getOrder
+      tags:
+      - Orders
+      summary: Get a single order
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: The order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+    patch:
+      operationId: updateOrder
+      tags:
+      - Orders
+      summary: Update a single order
+      parameters:
+      - $ref: '#/components/parameters/DuffelVersion'
+      - $ref: '#/components/parameters/PathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The updated order.
+components:
+  schemas:
+    Payment:
+      type: object
+      required:
+      - type
+      - amount
+      - currency
+      properties:
+        type:
+          type: string
+          enum:
+          - balance
+          - arc_bsp_cash
+          - card
+        amount:
+          type: string
+          example: '521.79'
+        currency:
+          type: string
+          example: GBP
+    OrderResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Order'
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ord_0000A3bQP9RLVfNUcdpLpw
+        booking_reference:
+          type: string
+          example: RZ3KML
+        total_amount:
+          type: string
+        total_currency:
+          type: string
+        live_mode:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    CreateOrder:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - selected_offers
+          - passengers
+          properties:
+            type:
+              type: string
+              enum:
+              - instant
+              - hold
+            selected_offers:
+              type: array
+              items:
+                type: string
+            passengers:
+              type: array
+              items:
+                type: object
+            payments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Payment'
+  parameters:
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with your Duffel access token as a Bearer token in the Authorization header (Authorization: Bearer YOUR_ACCESS_TOKEN).'
