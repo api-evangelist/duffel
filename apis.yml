@@ -7,7 +7,20 @@ description: Duffel provides a single REST API for selling travel - flights from
   payments. The Duffel API exposes offer requests, offers, orders, seat maps, order
   changes and cancellations, payments, and Stays search-to-booking, with webhooks
   for asynchronous events.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/duffel.png
 tags:
 - Travel
 - Flights
@@ -18,174 +31,466 @@ created: '2026-06-25'
 modified: '2026-06-25'
 specificationVersion: '0.19'
 apis:
-- aid: duffel:duffel-offer-requests-api
-  name: Duffel Offer Requests API
-  tags:
-  - Offer Requests
-  - Flight Search
-  - Travel
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: duffel:duffel-ancillaries-api
+  name: Duffel Ancillaries API
+  description: The Ancillaries API from Duffel — 2 operation(s) for ancillaries.
   humanURL: https://duffel.com/docs/api/v2/offer-requests
   baseURL: https://api.duffel.com
+  tags:
+  - Ancillaries
   properties:
-  - url: https://duffel.com/docs/api/v2/offer-requests
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/offer-requests
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: Create an offer request describing the journey, passengers, and cabin
-    class to initiate a flight search; airlines return matching offers. Supports listing
-    and retrieving offer requests.
+  - type: OpenAPI
+    url: openapi/duffel-ancillaries-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
+- aid: duffel:duffel-offer-requests-api
+  name: Duffel Offer Requests API
+  description: Search for flights by creating offer requests.
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
+  tags:
+  - Offer Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/duffel-offer-requests-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
 - aid: duffel:duffel-offers-api
   name: Duffel Offers API
+  description: Flight offers returned for an offer request.
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
   tags:
   - Offers
-  - Pricing
-  - Flights
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://duffel.com/docs/api/v2/offers
-  baseURL: https://api.duffel.com
   properties:
-  - url: https://duffel.com/docs/api/v2/offers
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/offers
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: List and retrieve offers returned for an offer request, re-price an
-    offer against intended payment methods, and update offer passenger details before
-    booking.
-- aid: duffel:duffel-orders-api
-  name: Duffel Orders API
-  tags:
-  - Orders
-  - Booking
-  - Tickets
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://duffel.com/docs/api/v2/orders
-  baseURL: https://api.duffel.com
-  properties:
-  - url: https://duffel.com/docs/api/v2/orders
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/orders
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: Create flight orders from a selected offer with passenger and payment
-    details, list and retrieve orders, update order metadata, and add ancillary services.
-- aid: duffel:duffel-seat-maps-api
-  name: Duffel Seat Maps API
-  tags:
-  - Seat Maps
-  - Ancillaries
-  - Flights
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://duffel.com/docs/api/v2/seat-maps
-  baseURL: https://api.duffel.com
-  properties:
-  - url: https://duffel.com/docs/api/v2/seat-maps
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/seat-maps
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: Retrieve the seat map for an offer, including cabin layout and available
-    seat services with prices, so travellers can select seats during booking.
-- aid: duffel:duffel-order-changes-api
-  name: Duffel Order Changes API
-  tags:
-  - Order Changes
-  - Rebooking
-  - Flights
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://duffel.com/docs/api/v2/order-changes
-  baseURL: https://api.duffel.com
-  properties:
-  - url: https://duffel.com/docs/api/v2/order-changes
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/order-changes
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: Create a pending order change to modify an existing booking, retrieve
-    a single order change, and confirm the change to apply new flights and pricing.
+  - type: OpenAPI
+    url: openapi/duffel-offers-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
 - aid: duffel:duffel-order-cancellations-api
   name: Duffel Order Cancellations API
+  description: Cancel an existing order and preview refunds.
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
   tags:
   - Order Cancellations
-  - Refunds
-  - Flights
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://duffel.com/docs/api/v2/order-cancellations
-  baseURL: https://api.duffel.com
   properties:
-  - url: https://duffel.com/docs/api/v2/order-cancellations
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/order-cancellations
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: Create a pending order cancellation to preview refund amounts, list
-    and retrieve cancellations, and confirm a cancellation to refund and void the
-    order.
+  - type: OpenAPI
+    url: openapi/duffel-order-cancellations-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
+- aid: duffel:duffel-order-changes-api
+  name: Duffel Order Changes API
+  description: Modify an existing order.
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
+  tags:
+  - Order Changes
+  properties:
+  - type: OpenAPI
+    url: openapi/duffel-order-changes-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
+- aid: duffel:duffel-orders-api
+  name: Duffel Orders API
+  description: Create and manage flight orders (bookings).
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/duffel-orders-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
 - aid: duffel:duffel-payments-api
   name: Duffel Payments API
+  description: Pay for held orders.
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
   tags:
   - Payments
-  - Merchant of Record
-  - Billing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://duffel.com/docs/api/v2/payments
-  baseURL: https://api.duffel.com
   properties:
-  - url: https://duffel.com/docs/api/v2/payments
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/payments
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: Pay for orders held with Duffel, list and retrieve payments, and use
-    Payment Intents (where enabled) to collect card payments with Duffel as merchant
-    of record.
+  - type: OpenAPI
+    url: openapi/duffel-payments-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
+- aid: duffel:duffel-seat-maps-api
+  name: Duffel Seat Maps API
+  description: Seat maps for an offer.
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
+  tags:
+  - Seat Maps
+  properties:
+  - type: OpenAPI
+    url: openapi/duffel-seat-maps-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
 - aid: duffel:duffel-stays-api
   name: Duffel Stays API
+  description: Accommodation search and booking.
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
   tags:
   - Stays
-  - Hotels
-  - Accommodation
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://duffel.com/docs/api/v2/search
-  baseURL: https://api.duffel.com
   properties:
-  - url: https://duffel.com/docs/api/v2/search
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/search
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: Search 2M+ hotel properties, fetch detailed rates for an accommodation,
-    create a quote to confirm availability and price, then create and manage stay
-    bookings.
+  - type: OpenAPI
+    url: openapi/duffel-stays-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
 - aid: duffel:duffel-webhooks-api
   name: Duffel Webhooks API
+  description: Register endpoints to receive event notifications.
+  humanURL: https://duffel.com/docs/api/v2/offer-requests
+  baseURL: https://api.duffel.com
   tags:
   - Webhooks
-  - Events
-  - Notifications
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://duffel.com/docs/api/v2/webhooks
-  baseURL: https://api.duffel.com
   properties:
-  - url: https://duffel.com/docs/api/v2/webhooks
-    type: Documentation
-  - url: https://duffel.com/docs/api/v2/webhooks
-    type: APIReference
-  - url: openapi/duffel-openapi.yml
-    type: OpenAPI
-  description: Register webhook endpoints to receive asynchronous events such as order
-    creation, airline-initiated changes, and ping events; list, update, delete, and
-    ping webhooks.
+  - type: OpenAPI
+    url: openapi/duffel-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offer-requests
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/offers
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/offers
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/orders
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/orders
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/seat-maps
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-changes
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/order-cancellations
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/payments
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/payments
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/search
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/search
+  - type: Documentation
+    url: https://duffel.com/docs/api/v2/webhooks
+  - type: APIReference
+    url: https://duffel.com/docs/api/v2/webhooks
 common:
 - type: AgenticAccess
   url: agentic-access/duffel-agentic-access.yml
