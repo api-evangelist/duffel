@@ -1,0 +1,32 @@
+{
+  "provider": "duffel",
+  "sources": [
+    "duffel-ancillaries-api-openapi.yml",
+    "duffel-offer-requests-api-openapi.yml",
+    "duffel-offers-api-openapi.yml",
+    "duffel-order-cancellations-api-openapi.yml",
+    "duffel-order-changes-api-openapi.yml",
+    "duffel-orders-api-openapi.yml",
+    "duffel-payments-api-openapi.yml",
+    "duffel-seat-maps-api-openapi.yml",
+    "duffel-stays-api-openapi.yml",
+    "duffel-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "duffel-ancillaries-api-openapi.yml",
+    "duffel-offer-requests-api-openapi.yml",
+    "duffel-offers-api-openapi.yml",
+    "duffel-order-cancellations-api-openapi.yml",
+    "duffel-order-changes-api-openapi.yml",
+    "duffel-orders-api-openapi.yml",
+    "duffel-payments-api-openapi.yml",
+    "duffel-seat-maps-api-openapi.yml",
+    "duffel-stays-api-openapi.yml",
+    "duffel-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
