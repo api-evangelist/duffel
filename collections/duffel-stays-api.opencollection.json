@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duffel Ancillaries Stays API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stays",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search accommodation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/stays/search",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for accommodation by location (latitude/longitude plus radius) or a specific accommodation, with check-in/check-out dates, guests, and rooms. Returns a list of search results."
+        },
+        {
+          "info": {
+            "name": "Fetch all rates for a search result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/stays/search_results/:id/actions/fetch_all_rates",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves all available rooms and rates for a search result."
+        },
+        {
+          "info": {
+            "name": "Create a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/stays/quotes",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a quote for a chosen rate, confirming its current price before booking."
+        },
+        {
+          "info": {
+            "name": "Get a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/stays/quotes/:id",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a quote"
+        },
+        {
+          "info": {
+            "name": "List bookings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/stays/bookings",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List bookings"
+        },
+        {
+          "info": {
+            "name": "Create a booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/stays/bookings",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Books a quoted rate, supplying guest details and payment."
+        },
+        {
+          "info": {
+            "name": "Get a single booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/stays/bookings/:id",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single booking"
+        },
+        {
+          "info": {
+            "name": "Cancel a booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/stays/bookings/:id/actions/cancel",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a booking"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duffel Ancillaries Seat Maps API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Seat Maps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get seat maps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/seat_maps",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "offer_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of seat maps, one per segment, for the given offer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

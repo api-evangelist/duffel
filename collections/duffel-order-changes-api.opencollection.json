@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duffel Ancillaries Order Changes API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an order change request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/order_change_requests",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for the available change options for an existing order."
+        },
+        {
+          "info": {
+            "name": "Get a single order change request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/order_change_requests/:id",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single order change request"
+        },
+        {
+          "info": {
+            "name": "Create a pending order change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/order_changes",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a pending order change"
+        },
+        {
+          "info": {
+            "name": "Get a single order change",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/order_changes/:id",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single order change"
+        },
+        {
+          "info": {
+            "name": "Confirm an order change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/order_changes/:id/actions/confirm",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirms a pending order change, applying the new flights and pricing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

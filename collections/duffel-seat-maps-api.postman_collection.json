@@ -1,0 +1,137 @@
+{
+  "item": [
+    {
+      "id": "6e03947c-6361-4f33-ba73-5b27a138a607",
+      "name": "Seat Maps",
+      "description": {
+        "content": "Seat maps for an offer.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52e31450-16ba-4790-83df-bfc9f4f93b12",
+          "name": "Get seat maps",
+          "request": {
+            "name": "Get seat maps",
+            "description": {
+              "content": "Returns a list of seat maps, one per segment, for the given offer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "air",
+                "seat_maps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offer_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The version of the Duffel API to use for this request.",
+                "key": "Duffel-Version",
+                "value": "v2"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b03631d-334c-4c19-a94d-0ce7dd8c5cb1",
+              "name": "The seat maps for the offer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "air",
+                    "seat_maps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offer_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The version of the Duffel API to use for this request.",
+                    "key": "Duffel-Version",
+                    "value": "v2"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.duffel.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "01ef324c-347b-4802-bd2b-0ab87bf6d07b",
+    "name": "Duffel Ancillaries Seat Maps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.\n\nContact Support:\n Name: Duffel Support",
+      "type": "text/plain"
+    }
+  }
+}

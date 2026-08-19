@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Duffel Ancillaries Payments API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/payments",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List payments"
+        },
+        {
+          "info": {
+            "name": "Create a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.duffel.com/air/payments",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pays for a held order using a supported payment method."
+        },
+        {
+          "info": {
+            "name": "Get a single payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.duffel.com/air/payments/:id",
+            "headers": [
+              {
+                "name": "Duffel-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single payment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

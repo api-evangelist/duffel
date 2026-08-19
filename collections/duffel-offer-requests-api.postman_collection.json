@@ -1,0 +1,391 @@
+{
+  "item": [
+    {
+      "id": "e8cc69d4-6b4e-48ac-83c5-09b5c8a19707",
+      "name": "Offer Requests",
+      "description": {
+        "content": "Search for flights by creating offer requests.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f93fd59e-adc6-4ad2-8b0a-bfc233558aa9",
+          "name": "Create an offer request",
+          "request": {
+            "name": "Create an offer request",
+            "description": {
+              "content": "Searches for flights. Provide the slices, passengers, and an optional cabin class; Duffel queries airlines and returns matching offers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "air",
+                "offer_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "return_offers",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "supplier_timeout",
+                  "value": "20000"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The version of the Duffel API to use for this request.",
+                "key": "Duffel-Version",
+                "value": "v2"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"slices\": [\n      {\n        \"origin\": \"<string>\",\n        \"destination\": \"<string>\",\n        \"departure_date\": \"<date>\"\n      },\n      {\n        \"origin\": \"<string>\",\n        \"destination\": \"<string>\",\n        \"departure_date\": \"<date>\"\n      }\n    ],\n    \"passengers\": [\n      {\n        \"type\": \"<string>\",\n        \"age\": \"<integer>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"age\": \"<integer>\"\n      }\n    ],\n    \"cabin_class\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b7b410c-09f1-4199-b0fc-55f63f73e484",
+              "name": "The offer request was created with offers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "air",
+                    "offer_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "return_offers",
+                      "value": "true"
+                    },
+                    {
+                      "key": "supplier_timeout",
+                      "value": "20000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The version of the Duffel API to use for this request.",
+                    "key": "Duffel-Version",
+                    "value": "v2"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"slices\": [\n      {\n        \"origin\": \"LHR\",\n        \"destination\": \"JFK\",\n        \"departure_date\": \"2026-07-21\"\n      },\n      {\n        \"origin\": \"LHR\",\n        \"destination\": \"JFK\",\n        \"departure_date\": \"2026-07-21\"\n      }\n    ],\n    \"passengers\": [\n      {\n        \"type\": \"<string>\",\n        \"age\": \"<integer>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"age\": \"<integer>\"\n      }\n    ],\n    \"cabin_class\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"orq_0000A3tQSmKyqOrcySrGbo\",\n    \"live_mode\": true,\n    \"cabin_class\": \"string\",\n    \"slices\": [\n      {\n        \"origin\": \"LHR\",\n        \"destination\": \"JFK\",\n        \"departure_date\": \"2026-07-21\"\n      },\n      {\n        \"origin\": \"LHR\",\n        \"destination\": \"JFK\",\n        \"departure_date\": \"2026-07-21\"\n      }\n    ],\n    \"offers\": [\n      {\n        \"id\": \"off_0000A3vUda8dKRtUTwfM01\",\n        \"total_amount\": \"521.79\",\n        \"total_currency\": \"GBP\",\n        \"tax_amount\": \"string\",\n        \"owner\": {\n          \"iata_code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"expires_at\": \"2006-05-30T12:50:35.650Z\"\n      },\n      {\n        \"id\": \"off_0000A3vUda8dKRtUTwfM01\",\n        \"total_amount\": \"521.79\",\n        \"total_currency\": \"GBP\",\n        \"tax_amount\": \"string\",\n        \"owner\": {\n          \"iata_code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"expires_at\": \"1975-12-13T02:51:45.545Z\"\n      }\n    ],\n    \"created_at\": \"1993-11-27T23:45:17.568Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f45a68b-9a05-4ee8-99b4-88ec9f35de11",
+          "name": "List offer requests",
+          "request": {
+            "name": "List offer requests",
+            "description": {},
+            "url": {
+              "path": [
+                "air",
+                "offer_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The version of the Duffel API to use for this request.",
+                "key": "Duffel-Version",
+                "value": "v2"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a052f24e-284c-4fde-8d8d-49f2a1241660",
+              "name": "A paginated list of offer requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "air",
+                    "offer_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The version of the Duffel API to use for this request.",
+                    "key": "Duffel-Version",
+                    "value": "v2"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69fdec78-9510-4f44-9e4d-d3d7485c0f53",
+          "name": "Get a single offer request",
+          "request": {
+            "name": "Get a single offer request",
+            "description": {},
+            "url": {
+              "path": [
+                "air",
+                "offer_requests",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The version of the Duffel API to use for this request.",
+                "key": "Duffel-Version",
+                "value": "v2"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4886df8-8453-49e1-bbc3-423d9c77bc89",
+              "name": "The offer request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "air",
+                    "offer_requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The version of the Duffel API to use for this request.",
+                    "key": "Duffel-Version",
+                    "value": "v2"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"orq_0000A3tQSmKyqOrcySrGbo\",\n    \"live_mode\": false,\n    \"cabin_class\": \"string\",\n    \"slices\": [\n      {\n        \"origin\": \"LHR\",\n        \"destination\": \"JFK\",\n        \"departure_date\": \"2026-07-21\"\n      },\n      {\n        \"origin\": \"LHR\",\n        \"destination\": \"JFK\",\n        \"departure_date\": \"2026-07-21\"\n      }\n    ],\n    \"offers\": [\n      {\n        \"id\": \"off_0000A3vUda8dKRtUTwfM01\",\n        \"total_amount\": \"521.79\",\n        \"total_currency\": \"GBP\",\n        \"tax_amount\": \"string\",\n        \"owner\": {\n          \"iata_code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"expires_at\": \"2005-08-30T02:40:12.601Z\"\n      },\n      {\n        \"id\": \"off_0000A3vUda8dKRtUTwfM01\",\n        \"total_amount\": \"521.79\",\n        \"total_currency\": \"GBP\",\n        \"tax_amount\": \"string\",\n        \"owner\": {\n          \"iata_code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"expires_at\": \"1986-12-10T21:43:35.783Z\"\n      }\n    ],\n    \"created_at\": \"1954-07-11T14:11:04.672Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.duffel.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9676ba09-dd7f-40ba-a705-4b63b3adb75d",
+    "name": "Duffel Ancillaries Offer Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.\n\nContact Support:\n Name: Duffel Support",
+      "type": "text/plain"
+    }
+  }
+}
