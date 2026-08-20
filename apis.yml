@@ -267,6 +267,8 @@ apis:
   humanURL: https://duffel.com/docs/api/v2/offer-requests
   baseURL: https://api.duffel.com
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -451,6 +453,8 @@ apis:
   humanURL: https://duffel.com/docs/api/v2/offer-requests
   baseURL: https://api.duffel.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
