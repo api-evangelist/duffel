@@ -7,6 +7,18 @@ description: Duffel provides a single REST API for selling travel - flights from
   payments. The Duffel API exposes offer requests, offers, orders, seat maps, order
   changes and cancellations, payments, and Stays search-to-booking, with webhooks
   for asynchronous events.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
