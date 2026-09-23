@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Duffel Ancillaries Orders API
+  title: Duffel Orders API
   description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
   termsOfService: https://duffel.com/legal/terms-of-use
   contact:
@@ -84,6 +84,34 @@ paths:
           description: The updated order.
 components:
   schemas:
+    CreateOrder:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - selected_offers
+          - passengers
+          properties:
+            type:
+              type: string
+              enum:
+              - instant
+              - hold
+            selected_offers:
+              type: array
+              items:
+                type: string
+            passengers:
+              type: array
+              items:
+                type: object
+            payments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Payment'
     Payment:
       type: object
       required:
@@ -126,35 +154,19 @@ components:
         created_at:
           type: string
           format: date-time
-    CreateOrder:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - selected_offers
-          - passengers
-          properties:
-            type:
-              type: string
-              enum:
-              - instant
-              - hold
-            selected_offers:
-              type: array
-              items:
-                type: string
-            passengers:
-              type: array
-              items:
-                type: object
-            payments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Payment'
   parameters:
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
     DuffelVersion:
       name: Duffel-Version
       in: header
@@ -167,18 +179,6 @@ components:
       name: id
       in: path
       required: true
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
-    After:
-      name: after
-      in: query
       schema:
         type: string
   securitySchemes:

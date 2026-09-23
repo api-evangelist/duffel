@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Duffel Ancillaries Offer Requests API
+  title: Duffel Offer Requests API
   description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
   termsOfService: https://duffel.com/legal/terms-of-use
   contact:
@@ -102,6 +102,32 @@ components:
         expires_at:
           type: string
           format: date-time
+    CreateOfferRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - slices
+          - passengers
+          properties:
+            slices:
+              type: array
+              items:
+                $ref: '#/components/schemas/Slice'
+            passengers:
+              type: array
+              items:
+                $ref: '#/components/schemas/Passenger'
+            cabin_class:
+              type: string
+              enum:
+              - first
+              - business
+              - premium_economy
+              - economy
     Passenger:
       type: object
       properties:
@@ -113,6 +139,11 @@ components:
           - infant_without_seat
         age:
           type: integer
+    OfferRequestResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/OfferRequest'
     OfferRequest:
       type: object
       properties:
@@ -153,55 +184,10 @@ components:
           type: string
           format: date
           example: '2026-07-21'
-    OfferRequestResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/OfferRequest'
-    CreateOfferRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - slices
-          - passengers
-          properties:
-            slices:
-              type: array
-              items:
-                $ref: '#/components/schemas/Slice'
-            passengers:
-              type: array
-              items:
-                $ref: '#/components/schemas/Passenger'
-            cabin_class:
-              type: string
-              enum:
-              - first
-              - business
-              - premium_economy
-              - economy
   parameters:
-    Before:
-      name: before
+    After:
+      name: after
       in: query
-      schema:
-        type: string
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
-    PathId:
-      name: id
-      in: path
-      required: true
       schema:
         type: string
     Limit:
@@ -211,9 +197,23 @@ components:
         type: integer
         default: 50
         maximum: 200
-    After:
-      name: after
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    Before:
+      name: before
       in: query
+      schema:
+        type: string
+    PathId:
+      name: id
+      in: path
+      required: true
       schema:
         type: string
   securitySchemes:

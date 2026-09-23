@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Duffel Ancillaries Offers API
+  title: Duffel Offers API
   description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
   termsOfService: https://duffel.com/legal/terms-of-use
   contact:
@@ -123,6 +123,13 @@ components:
         data:
           $ref: '#/components/schemas/Offer'
   parameters:
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
     DuffelVersion:
       name: Duffel-Version
       in: header
@@ -137,13 +144,6 @@ components:
       required: true
       schema:
         type: string
-    Limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
   securitySchemes:
     bearerAuth:
       type: http

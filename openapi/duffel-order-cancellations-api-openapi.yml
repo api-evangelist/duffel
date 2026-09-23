@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Duffel Ancillaries Order Cancellations API
+  title: Duffel Order Cancellations API
   description: The Duffel API is a REST API to sell travel - flights, accommodation (Stays), and ancillaries. It covers offer requests and offers, orders, payments, seat maps, ancillary services, accommodation search and booking, and webhooks. Requests are authenticated with a Bearer access token and must include a Duffel-Version header identifying the API version.
   termsOfService: https://duffel.com/legal/terms-of-use
   contact:

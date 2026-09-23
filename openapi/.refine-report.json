@@ -1,16 +1,7 @@
 {
   "provider": "duffel",
   "sources": [
-    "duffel-ancillaries-api-openapi.yml",
-    "duffel-offer-requests-api-openapi.yml",
-    "duffel-offers-api-openapi.yml",
-    "duffel-order-cancellations-api-openapi.yml",
-    "duffel-order-changes-api-openapi.yml",
-    "duffel-orders-api-openapi.yml",
-    "duffel-payments-api-openapi.yml",
-    "duffel-seat-maps-api-openapi.yml",
-    "duffel-stays-api-openapi.yml",
-    "duffel-webhooks-api-openapi.yml"
+    "_original/duffel-openapi.yml"
   ],
   "outputs": [
     "duffel-ancillaries-api-openapi.yml",
@@ -27,6 +18,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "duffel-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "duffel-openapi.yml: declared missing tag: Ancillaries",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "duffel-ancillaries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-offer-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-offers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-order-cancellations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-order-changes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-seat-maps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-stays-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "duffel-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
