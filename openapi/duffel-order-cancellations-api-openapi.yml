@@ -71,6 +71,14 @@ paths:
           description: The confirmed order cancellation.
 components:
   parameters:
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
     PathId:
       name: id
       in: path
@@ -84,14 +92,6 @@ components:
         type: integer
         default: 50
         maximum: 200
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
   securitySchemes:
     bearerAuth:
       type: http

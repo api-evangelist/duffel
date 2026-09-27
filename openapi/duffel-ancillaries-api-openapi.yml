@@ -46,12 +46,6 @@ paths:
           description: The order with the added services.
 components:
   parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
     DuffelVersion:
       name: Duffel-Version
       in: header
@@ -60,6 +54,12 @@ components:
       schema:
         type: string
         default: v2
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

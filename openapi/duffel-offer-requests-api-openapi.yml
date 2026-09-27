@@ -78,72 +78,6 @@ paths:
                 $ref: '#/components/schemas/OfferRequestResponse'
 components:
   schemas:
-    Offer:
-      type: object
-      properties:
-        id:
-          type: string
-          example: off_0000A3vUda8dKRtUTwfM01
-        total_amount:
-          type: string
-          example: '521.79'
-        total_currency:
-          type: string
-          example: GBP
-        tax_amount:
-          type: string
-        owner:
-          type: object
-          properties:
-            iata_code:
-              type: string
-            name:
-              type: string
-        expires_at:
-          type: string
-          format: date-time
-    CreateOfferRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - slices
-          - passengers
-          properties:
-            slices:
-              type: array
-              items:
-                $ref: '#/components/schemas/Slice'
-            passengers:
-              type: array
-              items:
-                $ref: '#/components/schemas/Passenger'
-            cabin_class:
-              type: string
-              enum:
-              - first
-              - business
-              - premium_economy
-              - economy
-    Passenger:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - adult
-          - child
-          - infant_without_seat
-        age:
-          type: integer
-    OfferRequestResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/OfferRequest'
     OfferRequest:
       type: object
       properties:
@@ -184,10 +118,90 @@ components:
           type: string
           format: date
           example: '2026-07-21'
+    CreateOfferRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - slices
+          - passengers
+          properties:
+            slices:
+              type: array
+              items:
+                $ref: '#/components/schemas/Slice'
+            passengers:
+              type: array
+              items:
+                $ref: '#/components/schemas/Passenger'
+            cabin_class:
+              type: string
+              enum:
+              - first
+              - business
+              - premium_economy
+              - economy
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: off_0000A3vUda8dKRtUTwfM01
+        total_amount:
+          type: string
+          example: '521.79'
+        total_currency:
+          type: string
+          example: GBP
+        tax_amount:
+          type: string
+        owner:
+          type: object
+          properties:
+            iata_code:
+              type: string
+            name:
+              type: string
+        expires_at:
+          type: string
+          format: date-time
+    Passenger:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - adult
+          - child
+          - infant_without_seat
+        age:
+          type: integer
+    OfferRequestResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/OfferRequest'
   parameters:
-    After:
-      name: after
+    Before:
+      name: before
       in: query
+      schema:
+        type: string
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    PathId:
+      name: id
+      in: path
+      required: true
       schema:
         type: string
     Limit:
@@ -197,23 +211,9 @@ components:
         type: integer
         default: 50
         maximum: 200
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
-    Before:
-      name: before
+    After:
+      name: after
       in: query
-      schema:
-        type: string
-    PathId:
-      name: id
-      in: path
-      required: true
       schema:
         type: string
   securitySchemes:

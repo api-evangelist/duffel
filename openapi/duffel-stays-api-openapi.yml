@@ -130,6 +130,28 @@ paths:
         '200':
           description: The cancelled booking.
 components:
+  parameters:
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
   schemas:
     StaysSearch:
       type: object
@@ -169,28 +191,6 @@ components:
                       type: number
                     longitude:
                       type: number
-  parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
   securitySchemes:
     bearerAuth:
       type: http
