@@ -84,6 +84,24 @@ paths:
           description: The updated order.
 components:
   schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ord_0000A3bQP9RLVfNUcdpLpw
+        booking_reference:
+          type: string
+          example: RZ3KML
+        total_amount:
+          type: string
+        total_currency:
+          type: string
+        live_mode:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
     Payment:
       type: object
       required:
@@ -103,29 +121,6 @@ components:
         currency:
           type: string
           example: GBP
-    OrderResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Order'
-    Order:
-      type: object
-      properties:
-        id:
-          type: string
-          example: ord_0000A3bQP9RLVfNUcdpLpw
-        booking_reference:
-          type: string
-          example: RZ3KML
-        total_amount:
-          type: string
-        total_currency:
-          type: string
-        live_mode:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
     CreateOrder:
       type: object
       required:
@@ -154,6 +149,11 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Payment'
+    OrderResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Order'
   parameters:
     DuffelVersion:
       name: Duffel-Version
@@ -163,6 +163,11 @@ components:
       schema:
         type: string
         default: v2
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
     PathId:
       name: id
       in: path
@@ -176,11 +181,6 @@ components:
         type: integer
         default: 50
         maximum: 200
-    After:
-      name: after
-      in: query
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

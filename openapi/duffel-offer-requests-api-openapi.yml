@@ -78,6 +78,25 @@ paths:
                 $ref: '#/components/schemas/OfferRequestResponse'
 components:
   schemas:
+    Slice:
+      type: object
+      required:
+      - origin
+      - destination
+      - departure_date
+      properties:
+        origin:
+          type: string
+          description: IATA city or airport code for the origin.
+          example: LHR
+        destination:
+          type: string
+          description: IATA city or airport code for the destination.
+          example: JFK
+        departure_date:
+          type: string
+          format: date
+          example: '2026-07-21'
     OfferRequest:
       type: object
       properties:
@@ -99,25 +118,35 @@ components:
         created_at:
           type: string
           format: date-time
-    Slice:
+    Offer:
       type: object
-      required:
-      - origin
-      - destination
-      - departure_date
       properties:
-        origin:
+        id:
           type: string
-          description: IATA city or airport code for the origin.
-          example: LHR
-        destination:
+          example: off_0000A3vUda8dKRtUTwfM01
+        total_amount:
           type: string
-          description: IATA city or airport code for the destination.
-          example: JFK
-        departure_date:
+          example: '521.79'
+        total_currency:
           type: string
-          format: date
-          example: '2026-07-21'
+          example: GBP
+        tax_amount:
+          type: string
+        owner:
+          type: object
+          properties:
+            iata_code:
+              type: string
+            name:
+              type: string
+        expires_at:
+          type: string
+          format: date-time
+    OfferRequestResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/OfferRequest'
     CreateOfferRequest:
       type: object
       required:
@@ -144,30 +173,6 @@ components:
               - business
               - premium_economy
               - economy
-    Offer:
-      type: object
-      properties:
-        id:
-          type: string
-          example: off_0000A3vUda8dKRtUTwfM01
-        total_amount:
-          type: string
-          example: '521.79'
-        total_currency:
-          type: string
-          example: GBP
-        tax_amount:
-          type: string
-        owner:
-          type: object
-          properties:
-            iata_code:
-              type: string
-            name:
-              type: string
-        expires_at:
-          type: string
-          format: date-time
     Passenger:
       type: object
       properties:
@@ -179,11 +184,6 @@ components:
           - infant_without_seat
         age:
           type: integer
-    OfferRequestResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/OfferRequest'
   parameters:
     Before:
       name: before
@@ -198,6 +198,11 @@ components:
       schema:
         type: string
         default: v2
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
     PathId:
       name: id
       in: path
@@ -211,11 +216,6 @@ components:
         type: integer
         default: 50
         maximum: 200
-    After:
-      name: after
-      in: query
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
