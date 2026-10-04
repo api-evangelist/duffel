@@ -77,7 +77,50 @@ paths:
               schema:
                 $ref: '#/components/schemas/OfferRequestResponse'
 components:
+  parameters:
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
+    Before:
+      name: before
+      in: query
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    Passenger:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - adult
+          - child
+          - infant_without_seat
+        age:
+          type: integer
     Slice:
       type: object
       required:
@@ -97,27 +140,6 @@ components:
           type: string
           format: date
           example: '2026-07-21'
-    OfferRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          example: orq_0000A3tQSmKyqOrcySrGbo
-        live_mode:
-          type: boolean
-        cabin_class:
-          type: string
-        slices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Slice'
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer'
-        created_at:
-          type: string
-          format: date-time
     Offer:
       type: object
       properties:
@@ -173,49 +195,27 @@ components:
               - business
               - premium_economy
               - economy
-    Passenger:
+    OfferRequest:
       type: object
       properties:
-        type:
+        id:
           type: string
-          enum:
-          - adult
-          - child
-          - infant_without_seat
-        age:
-          type: integer
-  parameters:
-    Before:
-      name: before
-      in: query
-      schema:
-        type: string
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
-    After:
-      name: after
-      in: query
-      schema:
-        type: string
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
+          example: orq_0000A3tQSmKyqOrcySrGbo
+        live_mode:
+          type: boolean
+        cabin_class:
+          type: string
+        slices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Slice'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        created_at:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

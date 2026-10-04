@@ -71,12 +71,6 @@ paths:
           description: The confirmed order cancellation.
 components:
   parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
     DuffelVersion:
       name: Duffel-Version
       in: header
@@ -85,6 +79,12 @@ components:
       schema:
         type: string
         default: v2
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
     Limit:
       name: limit
       in: query

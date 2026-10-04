@@ -62,12 +62,6 @@ paths:
           description: The payment.
 components:
   parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
     DuffelVersion:
       name: Duffel-Version
       in: header
@@ -76,7 +70,28 @@ components:
       schema:
         type: string
         default: v2
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    CreatePayment:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - order_id
+          - payment
+          properties:
+            order_id:
+              type: string
+            payment:
+              $ref: '#/components/schemas/Payment'
     Payment:
       type: object
       required:
@@ -96,21 +111,6 @@ components:
         currency:
           type: string
           example: GBP
-    CreatePayment:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - order_id
-          - payment
-          properties:
-            order_id:
-              type: string
-            payment:
-              $ref: '#/components/schemas/Payment'
   securitySchemes:
     bearerAuth:
       type: http

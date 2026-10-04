@@ -83,7 +83,39 @@ paths:
         '200':
           description: The updated order.
 components:
+  parameters:
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    OrderResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Order'
     Order:
       type: object
       properties:
@@ -149,38 +181,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Payment'
-    OrderResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Order'
-  parameters:
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
-    After:
-      name: after
-      in: query
-      schema:
-        type: string
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
   securitySchemes:
     bearerAuth:
       type: http

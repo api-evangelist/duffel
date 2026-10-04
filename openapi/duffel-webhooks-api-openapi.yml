@@ -84,21 +84,6 @@ paths:
         '204':
           description: A ping event was sent to the webhook.
 components:
-  parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
   schemas:
     CreateWebhook:
       type: object
@@ -119,6 +104,21 @@ components:
               items:
                 type: string
                 example: order.created
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
   securitySchemes:
     bearerAuth:
       type: http
