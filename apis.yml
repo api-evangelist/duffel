@@ -509,6 +509,9 @@ apis:
   - type: APIReference
     url: https://duffel.com/docs/api/v2/webhooks
 common:
+- type: CapabilityMap
+  url: capabilities/duffel-capability-edges.yml
+  name: Duffel Business Capability Map
 - type: AgenticAccess
   url: agentic-access/duffel-agentic-access.yml
 - type: VulnerabilityDisclosure
