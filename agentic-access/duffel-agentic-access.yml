@@ -1,20 +1,51 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/duffel-openapi.yml
+source: openapi/duffel-ancillaries-api-openapi.yml, openapi/duffel-offer-requests-api-openapi.yml,
+  openapi/duffel-offers-api-openapi.yml, openapi/duffel-order-cancellations-api-openapi.yml,
+  openapi/duffel-order-changes-api-openapi.yml, openapi/duffel-orders-api-openapi.yml, openapi/duffel-payments-api-openapi.yml,
+  openapi/duffel-seat-maps-api-openapi.yml, openapi/duffel-stays-api-openapi.yml, openapi/duffel-webhooks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 39
   by_action_class:
-    acting: 21
-    connected: 18
+    connected: 20
+    acting: 19
   by_consequence:
-    write: 12
-    read: 18
+    read: 20
     physical: 9
+    write: 10
   human_in_the_loop_required: 0
 operations:
+- path: /air/orders/{id}/available_services
+  method: get
+  operationId: listAvailableServices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /air/orders/{id}/services
+  method: post
+  operationId: addServiceToOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /air/offer_requests
   method: post
   operationId: createOfferRequest
@@ -103,9 +134,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /air/orders
+- path: /air/order_cancellations
   method: post
-  operationId: createOrder
+  operationId: createOrderCancellation
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -121,9 +152,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /air/orders
+- path: /air/order_cancellations
   method: get
-  operationId: listOrders
+  operationId: listOrderCancellations
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -131,9 +162,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /air/orders/{id}
+- path: /air/order_cancellations/{id}
   method: get
-  operationId: getOrder
+  operationId: getOrderCancellation
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -141,37 +172,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /air/orders/{id}
-  method: patch
-  operationId: updateOrder
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /air/orders/{id}/available_services
-  method: get
-  operationId: listAvailableServices
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /air/orders/{id}/services
+- path: /air/order_cancellations/{id}/actions/confirm
   method: post
-  operationId: addServiceToOrder
+  operationId: confirmOrderCancellation
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -261,9 +264,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /air/order_cancellations
+- path: /air/orders
   method: post
-  operationId: createOrderCancellation
+  operationId: createOrder
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -279,9 +282,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /air/order_cancellations
+- path: /air/orders
   method: get
-  operationId: listOrderCancellations
+  operationId: listOrders
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -289,9 +292,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /air/order_cancellations/{id}
+- path: /air/orders/{id}
   method: get
-  operationId: getOrderCancellation
+  operationId: getOrder
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -299,9 +302,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /air/order_cancellations/{id}/actions/confirm
-  method: post
-  operationId: confirmOrderCancellation
+- path: /air/orders/{id}
+  method: patch
+  operationId: updateOrder
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -365,25 +368,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /air/webhooks
+- path: /stays/search
   method: post
-  operationId: createWebhook
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /air/webhooks
-  method: get
-  operationId: listWebhooks
+  operationId: searchStays
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -391,86 +378,16 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /air/webhooks/{id}
-  method: patch
-  operationId: updateWebhook
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /air/webhooks/{id}
-  method: delete
-  operationId: deleteWebhook
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /air/webhooks/{id}/actions/ping
-  method: post
-  operationId: pingWebhook
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /stays/search
-  method: post
-  operationId: searchStays
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /stays/search_results/{id}/actions/fetch_all_rates
   method: post
   operationId: fetchAllRates
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /stays/quotes
   method: post
   operationId: createStaysQuote
@@ -536,6 +453,80 @@ operations:
 - path: /stays/bookings/{id}/actions/cancel
   method: post
   operationId: cancelStaysBooking
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /air/webhooks
+  method: post
+  operationId: createWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /air/webhooks
+  method: get
+  operationId: listWebhooks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /air/webhooks/{id}
+  method: patch
+  operationId: updateWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /air/webhooks/{id}
+  method: delete
+  operationId: deleteWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /air/webhooks/{id}/actions/ping
+  method: post
+  operationId: pingWebhook
   x-agentic-access:
     action-class: acting
     consequence: write
