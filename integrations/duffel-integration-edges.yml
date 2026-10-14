@@ -1,0 +1,394 @@
+edges:
+- partner_name: Air Canada
+  partner: air-canada
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - AC
+  ndc_direct: true
+  content_source:
+  - air_canada
+  - travelport
+  features_in_production:
+  - baggage allowance
+  - cancellation
+  - hold order, pay later
+  - loyalty programme
+  - offer and order conditions
+  - void
+- partner_name: Air France / KLM
+  partner: air-france-klm
+  partner_match: brand-group
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - AF
+  - KL
+  ndc_direct: true
+  content_source:
+  - air_france_klm
+  features_in_production:
+  - baggage
+  - baggage allowance
+  - cancellation
+  - changes
+  - hold order, pay later
+  - offer and order conditions
+  - seat selection
+  - void
+- partner_name: Alaska Airlines
+  partner: alaska-air
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - AS
+  ndc_direct: false
+  content_source:
+  - travelport
+  features_in_production:
+  - baggage allowance
+  - hold order, pay later
+  - offer and order conditions
+- partner_name: American Airlines
+  partner: american-airlines
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - AA
+  ndc_direct: true
+  content_source:
+  - american_airlines
+  features_in_production:
+  - baggage allowance
+  - cancellation
+  - changes
+  - hold order, pay later
+  - loyalty programme
+  - offer and order conditions
+  - seat selection
+  - void
+- partner_name: British Airways
+  partner: british-airways
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - BA
+  ndc_direct: true
+  content_source:
+  - british_airways
+  features_in_production:
+  - baggage
+  - baggage allowance
+  - cancellation
+  - changes
+  - hold order, pay later
+  - loyalty programme
+  - offer and order conditions
+  - private fares
+  - seat selection
+  - void
+- partner_name: easyJet
+  partner: easyjet
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - U2
+  ndc_direct: true
+  content_source:
+  - easyjet
+  features_in_production:
+  - baggage
+  - cancellation
+  - seat selection
+  - void
+- partner_name: Emirates
+  partner: emirates
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - EK
+  ndc_direct: true
+  content_source:
+  - emirates
+  features_in_production:
+  - baggage
+  - baggage allowance
+  - cancellation
+  - hold order, pay later
+  - loyalty programme
+  - offer and order conditions
+  - private fares
+  - void
+- partner_name: Frontier Airlines
+  partner: frontier-group-holdings
+  partner_match: brand-group
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - F9
+  ndc_direct: false
+  content_source:
+  - travelport
+  features_in_production:
+  - baggage allowance
+  - offer and order conditions
+- partner_name: Hawaiian Airlines
+  partner: hawaiian-holdings
+  partner_match: brand-group
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - HA
+  ndc_direct: true
+  content_source:
+  - hawaiian_airlines
+  features_in_production:
+  - seat selection
+- partner_name: JetBlue
+  partner: jetblue
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - B6
+  ndc_direct: false
+  content_source:
+  - travelport
+  features_in_production:
+  - baggage allowance
+  - hold order, pay later
+  - offer and order conditions
+- partner_name: Jetstar
+  partner: jetstar
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - JQ
+  ndc_direct: true
+  content_source:
+  - jetstar
+  features_in_production:
+  - baggage
+  - baggage allowance
+  - cancellation
+  - hold order, pay later
+  - loyalty programme
+  - offer and order conditions
+  - seat selection
+  - void
+- partner_name: Lufthansa
+  partner: lufthansa
+  partner_match: verified-token
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - LH
+  ndc_direct: true
+  content_source:
+  - lufthansa_group
+  features_in_production:
+  - baggage
+  - baggage allowance
+  - cancellation
+  - changes
+  - hold order, pay later
+  - loyalty programme
+  - private fares
+  - seat selection
+  - void
+- partner_name: Porter Airlines
+  partner: porter-airlines
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - PD
+  ndc_direct: false
+  content_source:
+  - travelport
+  features_in_production:
+  - baggage allowance
+  - hold order, pay later
+  - offer and order conditions
+- partner_name: Qantas
+  partner: qantas
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - QF
+  ndc_direct: true
+  content_source:
+  - qantas
+  features_in_production:
+  - baggage
+  - baggage allowance
+  - cancellation
+  - changes
+  - loyalty programme
+  - seat selection
+  - void
+- partner_name: United Airlines
+  partner: united-airlines
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - UA
+  ndc_direct: true
+  content_source:
+  - united
+  features_in_production:
+  - baggage
+  - baggage allowance
+  - changes
+  - hold order, pay later
+  - loyalty programme
+  - private fares
+  - seat selection
+- partner_name: Virgin Atlantic
+  partner: virgin-atlantic
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - VS
+  ndc_direct: false
+  content_source:
+  - travelport
+  features_in_production:
+  - baggage allowance
+  - hold order, pay later
+  - offer and order conditions
+- partner_name: Virgin Australia
+  partner: virgin-australia
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - VA
+  ndc_direct: false
+  content_source:
+  - travelport
+  features_in_production:
+  - baggage allowance
+  - hold order, pay later
+  - offer and order conditions
+- partner_name: WestJet
+  partner: westjet
+  partner_match: domain+verified
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: carrier-coverage
+  evidence: https://duffel.com/flights/airlines
+  detected_by: sweep-travel.py
+  first_seen: '2026-10-14'
+  iata_codes:
+  - WS
+  ndc_direct: false
+  content_source:
+  - travelport
+  features_in_production:
+  - baggage allowance
+  - cancellation
+  - hold order, pay later
+  - loyalty programme
+  - void
+generated: '2026-10-14'
+method: searched
+checked:
+- https://duffel.com/flights/airlines
+source: https://duffel.com/flights/airlines
