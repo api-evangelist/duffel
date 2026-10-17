@@ -77,50 +77,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/OfferRequestResponse'
 components:
-  parameters:
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
-    After:
-      name: after
-      in: query
-      schema:
-        type: string
-    Before:
-      name: before
-      in: query
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    Passenger:
+    OfferRequest:
       type: object
       properties:
-        type:
+        id:
           type: string
-          enum:
-          - adult
-          - child
-          - infant_without_seat
-        age:
-          type: integer
+          example: orq_0000A3tQSmKyqOrcySrGbo
+        live_mode:
+          type: boolean
+        cabin_class:
+          type: string
+        slices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Slice'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        created_at:
+          type: string
+          format: date-time
     Slice:
       type: object
       required:
@@ -164,11 +142,6 @@ components:
         expires_at:
           type: string
           format: date-time
-    OfferRequestResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/OfferRequest'
     CreateOfferRequest:
       type: object
       required:
@@ -195,27 +168,54 @@ components:
               - business
               - premium_economy
               - economy
-    OfferRequest:
+    OfferRequestResponse:
       type: object
       properties:
-        id:
+        data:
+          $ref: '#/components/schemas/OfferRequest'
+    Passenger:
+      type: object
+      properties:
+        type:
           type: string
-          example: orq_0000A3tQSmKyqOrcySrGbo
-        live_mode:
-          type: boolean
-        cabin_class:
-          type: string
-        slices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Slice'
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer'
-        created_at:
-          type: string
-          format: date-time
+          enum:
+          - adult
+          - child
+          - infant_without_seat
+        age:
+          type: integer
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Before:
+      name: before
+      in: query
+      schema:
+        type: string
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -93,6 +93,19 @@ paths:
           description: The updated offer passenger.
 components:
   parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
     DuffelVersion:
       name: Duffel-Version
       in: header
@@ -101,25 +114,7 @@ components:
       schema:
         type: string
         default: v2
-    Limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    OfferResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Offer'
     Offer:
       type: object
       properties:
@@ -144,6 +139,11 @@ components:
         expires_at:
           type: string
           format: date-time
+    OfferResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Offer'
   securitySchemes:
     bearerAuth:
       type: http

@@ -83,39 +83,7 @@ paths:
         '200':
           description: The updated order.
 components:
-  parameters:
-    DuffelVersion:
-      name: Duffel-Version
-      in: header
-      required: true
-      description: The version of the Duffel API to use for this request.
-      schema:
-        type: string
-        default: v2
-    After:
-      name: after
-      in: query
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 50
-        maximum: 200
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    OrderResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Order'
     Order:
       type: object
       properties:
@@ -134,25 +102,6 @@ components:
         created_at:
           type: string
           format: date-time
-    Payment:
-      type: object
-      required:
-      - type
-      - amount
-      - currency
-      properties:
-        type:
-          type: string
-          enum:
-          - balance
-          - arc_bsp_cash
-          - card
-        amount:
-          type: string
-          example: '521.79'
-        currency:
-          type: string
-          example: GBP
     CreateOrder:
       type: object
       required:
@@ -181,6 +130,57 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Payment'
+    OrderResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Order'
+    Payment:
+      type: object
+      required:
+      - type
+      - amount
+      - currency
+      properties:
+        type:
+          type: string
+          enum:
+          - balance
+          - arc_bsp_cash
+          - card
+        amount:
+          type: string
+          example: '521.79'
+        currency:
+          type: string
+          example: GBP
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+    DuffelVersion:
+      name: Duffel-Version
+      in: header
+      required: true
+      description: The version of the Duffel API to use for this request.
+      schema:
+        type: string
+        default: v2
+    After:
+      name: after
+      in: query
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
