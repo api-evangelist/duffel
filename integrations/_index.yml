@@ -201,3 +201,31 @@
   relationship: carrier-coverage
   status: not-a-workflow
   arazzo: null
+- slug: duffel-index-ventures
+  label: Index Ventures
+  partner: index-ventures
+  partner_name: Index Ventures
+  category: vc portfolio participation
+  type: register
+  channel: standard-directory
+  evidence: https://www.indexventures.com/companies/duffel/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Index Ventures companies (indexventures.com/companies/)
+    standard: null
+    spec_file: null
+    role: vc-portfolio-company
+    registered_name: Duffel
+    register_id: https://www.indexventures.com/companies/duffel/
+    register_country: europe
+    register_website: http://duffel.com
+    matched_domain: duffel.com
+    matched_by: domain
+    signal_note: 'participation only: the venture firm''s own published portfolio lists the company (investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-vc-portfolios.py
+    detected: '2026-10-21'
+    sector: mobility
+  status: not-a-workflow
+  arazzo: null
