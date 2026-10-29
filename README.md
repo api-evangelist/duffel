@@ -1,4 +1,4 @@
-# Duffel (duffel)
+# Duffel
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,223 +66,135 @@
 
 Duffel provides a single REST API for selling travel - flights from 300+ airlines, 2M+ hotel properties (Stays), loyalty programmes, and merchant-of-record payments. The Duffel API exposes offer requests, offers, orders, seat maps, order changes and cancellations, payments, and Stays search-to-booking, with webhooks for asynchronous events.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/duffel/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/duffel/refs/heads/main/apis.yml)
+**Areas:** Travel · Flights · Hotels · Booking · Payments
 
-## Tags
+## Duffel on APIs.io
 
-- Travel
-- Flights
-- Hotels
-- Booking
-- Payments
+Everything profiled for Duffel is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/duffel/](https://apis.io/providers/duffel/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (10)
 
-- **Created:** 2026-06-25
-- **Modified:** 2026-06-25
+- [Duffel Ancillaries API](https://apis.io/apis/duffel/duffel-ancillaries-api/) — The Ancillaries API from Duffel — 2 operation(s) for ancillaries.
+- [Duffel Offer Requests API](https://apis.io/apis/duffel/duffel-offer-requests-api/) — Search for flights by creating offer requests.
+- [Duffel Offers API](https://apis.io/apis/duffel/duffel-offers-api/) — Flight offers returned for an offer request.
+- [Duffel Order Cancellations API](https://apis.io/apis/duffel/duffel-order-cancellations-api/) — Cancel an existing order and preview refunds.
+- [Duffel Order Changes API](https://apis.io/apis/duffel/duffel-order-changes-api/) — Modify an existing order.
+- [Duffel Orders API](https://apis.io/apis/duffel/duffel-orders-api/) — Create and manage flight orders (bookings).
+- [Duffel Payments API](https://apis.io/apis/duffel/duffel-payments-api/) — Pay for held orders.
+- [Duffel Seat Maps API](https://apis.io/apis/duffel/duffel-seat-maps-api/) — Seat maps for an offer.
+- [Duffel Stays API](https://apis.io/apis/duffel/duffel-stays-api/) — Accommodation search and booking.
+- [Duffel Webhooks API](https://apis.io/apis/duffel/duffel-webhooks-api/) — Register endpoints to receive event notifications.
 
-## APIs
+### Published properties
 
-### Duffel Offer Requests API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create an offer request describing the journey, passengers, and cabin class to initiate a flight search; airlines return matching offers. Supports listing and retrieving offer requests.
+#### Agentic access (1)
 
-- **Human URL:** [https://duffel.com/docs/api/v2/offer-requests](https://duffel.com/docs/api/v2/offer-requests)
-- **Base URL:** `https://api.duffel.com`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Duffel Agentic Access](https://apis.io/agentic-access/duffel/duffel-agentic-access/)
 
-- Offer Requests
-- Flight Search
-- Travel
+#### Collections (11)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://duffel.com/docs/api/v2/offer-requests)
-- [API Reference](https://duffel.com/docs/api/v2/offer-requests)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Duffel API](https://apis.io/collections/duffel/open-duffel/)
+- [Duffel Ancillaries API](https://apis.io/collections/duffel/open-duffel-ancillaries-api/)
+- [Duffel Ancillaries Offer Requests API](https://apis.io/collections/duffel/open-duffel-offer-requests-api/)
+- [Duffel Ancillaries Offers API](https://apis.io/collections/duffel/open-duffel-offers-api/)
+- [Duffel Ancillaries Order Cancellations API](https://apis.io/collections/duffel/open-duffel-order-cancellations-api/)
+- [Duffel Ancillaries Order Changes API](https://apis.io/collections/duffel/open-duffel-order-changes-api/)
+- [Duffel Ancillaries Orders API](https://apis.io/collections/duffel/open-duffel-orders-api/)
+- [Duffel Ancillaries Payments API](https://apis.io/collections/duffel/open-duffel-payments-api/)
+- [Duffel Ancillaries Seat Maps API](https://apis.io/collections/duffel/open-duffel-seat-maps-api/)
+- [Duffel Ancillaries Stays API](https://apis.io/collections/duffel/open-duffel-stays-api/)
+- [Duffel Ancillaries Webhooks API](https://apis.io/collections/duffel/open-duffel-webhooks-api/)
 
-### Duffel Offers API
+#### Security (3)
 
-List and retrieve offers returned for an offer request, re-price an offer against intended payment methods, and update offer passenger details before booking.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://duffel.com/docs/api/v2/offers](https://duffel.com/docs/api/v2/offers)
-- **Base URL:** `https://api.duffel.com`
+- [Duffel Authentication](https://apis.io/security/duffel/duffel-authentication/)
+- [Duffel Domain Security](https://apis.io/security/duffel/duffel-domain-security/)
+- [Duffel Vulnerability Disclosure](https://apis.io/security/duffel/duffel-vulnerability-disclosure/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Offers
-- Pricing
-- Flights
+Published plans, tiers and prices.
 
-#### Properties
+- [Duffel Plans Pricing](https://apis.io/plans/duffel/duffel-plans-pricing/)
 
-- [Documentation](https://duffel.com/docs/api/v2/offers)
-- [API Reference](https://duffel.com/docs/api/v2/offers)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Duffel Orders API
+Published request limits.
 
-Create flight orders from a selected offer with passenger and payment details, list and retrieve orders, update order metadata, and add ancillary services.
+- [Duffel Rate Limits](https://apis.io/rate-limits/duffel/duffel-rate-limits/)
 
-- **Human URL:** [https://duffel.com/docs/api/v2/orders](https://duffel.com/docs/api/v2/orders)
-- **Base URL:** `https://api.duffel.com`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Orders
-- Booking
-- Tickets
+- [Duffel Finops](https://apis.io/finops/duffel/duffel-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://duffel.com/docs/api/v2/orders)
-- [API Reference](https://duffel.com/docs/api/v2/orders)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Duffel Seat Maps API
-
-Retrieve the seat map for an offer, including cabin layout and available seat services with prices, so travellers can select seats during booking.
-
-- **Human URL:** [https://duffel.com/docs/api/v2/seat-maps](https://duffel.com/docs/api/v2/seat-maps)
-- **Base URL:** `https://api.duffel.com`
-
-#### Tags
-
-- Seat Maps
-- Ancillaries
-- Flights
-
-#### Properties
-
-- [Documentation](https://duffel.com/docs/api/v2/seat-maps)
-- [API Reference](https://duffel.com/docs/api/v2/seat-maps)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Duffel Order Changes API
-
-Create a pending order change to modify an existing booking, retrieve a single order change, and confirm the change to apply new flights and pricing.
-
-- **Human URL:** [https://duffel.com/docs/api/v2/order-changes](https://duffel.com/docs/api/v2/order-changes)
-- **Base URL:** `https://api.duffel.com`
-
-#### Tags
-
-- Order Changes
-- Rebooking
-- Flights
-
-#### Properties
-
-- [Documentation](https://duffel.com/docs/api/v2/order-changes)
-- [API Reference](https://duffel.com/docs/api/v2/order-changes)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Duffel Order Cancellations API
-
-Create a pending order cancellation to preview refund amounts, list and retrieve cancellations, and confirm a cancellation to refund and void the order.
-
-- **Human URL:** [https://duffel.com/docs/api/v2/order-cancellations](https://duffel.com/docs/api/v2/order-cancellations)
-- **Base URL:** `https://api.duffel.com`
-
-#### Tags
-
-- Order Cancellations
-- Refunds
-- Flights
-
-#### Properties
-
-- [Documentation](https://duffel.com/docs/api/v2/order-cancellations)
-- [API Reference](https://duffel.com/docs/api/v2/order-cancellations)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Duffel Payments API
-
-Pay for orders held with Duffel, list and retrieve payments, and use Payment Intents (where enabled) to collect card payments with Duffel as merchant of record.
-
-- **Human URL:** [https://duffel.com/docs/api/v2/payments](https://duffel.com/docs/api/v2/payments)
-- **Base URL:** `https://api.duffel.com`
-
-#### Tags
-
-- Payments
-- Merchant of Record
-- Billing
-
-#### Properties
-
-- [Documentation](https://duffel.com/docs/api/v2/payments)
-- [API Reference](https://duffel.com/docs/api/v2/payments)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Duffel Stays API
-
-Search 2M+ hotel properties, fetch detailed rates for an accommodation, create a quote to confirm availability and price, then create and manage stay bookings.
-
-- **Human URL:** [https://duffel.com/docs/api/v2/search](https://duffel.com/docs/api/v2/search)
-- **Base URL:** `https://api.duffel.com`
-
-#### Tags
-
-- Stays
-- Hotels
-- Accommodation
-
-#### Properties
-
-- [Documentation](https://duffel.com/docs/api/v2/search)
-- [API Reference](https://duffel.com/docs/api/v2/search)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Duffel Webhooks API
-
-Register webhook endpoints to receive asynchronous events such as order creation, airline-initiated changes, and ping events; list, update, delete, and ping webhooks.
-
-- **Human URL:** [https://duffel.com/docs/api/v2/webhooks](https://duffel.com/docs/api/v2/webhooks)
-- **Base URL:** `https://api.duffel.com`
-
-#### Tags
-
-- Webhooks
-- Events
-- Notifications
-
-#### Properties
-
-- [Documentation](https://duffel.com/docs/api/v2/webhooks)
-- [API Reference](https://duffel.com/docs/api/v2/webhooks)
-- [OpenAPI](openapi/duffel-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/duffel.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/duffel.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/duffelhq)
-- [LinkedIn](https://www.linkedin.com/company/duffel)
 - [Website](https://duffel.com)
 - [Documentation](https://duffel.com/docs)
-- [Plans](plans/duffel-plans-pricing.yml)
-- [Rate Limits](rate-limits/duffel-rate-limits.yml)
-- [Fin Ops](finops/duffel-finops.yml)
+- [Blog](https://duffel.com/blog)
+- [GitHub](https://github.com/duffelhq)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.6** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 45.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.1** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/duffel/](https://apis.io/providers/duffel/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Duffel: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/duffel/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
